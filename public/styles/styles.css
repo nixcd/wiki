@@ -1,0 +1,233 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand:300,regular,500,600,700);
+
+:root {
+  --primary-color: #fff503;
+  --secondary-color: #24242C;
+  --blue-color: #0f82da;
+  --secondary-blue-color: #1f5cab;
+  --all-fonts: font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+legend > a:hover {
+  transition: all 0.4s ease;
+  color: var(--primary-color);
+}
+
+body {
+  font-family: var(--all-fonts);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Principal Header */
+
+header#principal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+  height: 5rem;
+  width: 100%;
+  color: #000000;
+  font-size: 1rem;
+}
+
+div#search li{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+}
+
+div#search li > a {
+  margin-left: 1rem;
+}
+
+
+/* @media screen and (max-width: 600px) {
+  div#search > nav > li:first-of-type {
+    flex-direction: column;
+  } 
+
+  header#principal-header {
+    height: 10rem;
+  }
+
+  nav > li a {
+    margin-top: 1rem;
+  }
+}
+
+nav > li a {
+  text-align: center;
+  margin-left: 2rem;
+} */
+
+/* Principal Content */
+
+div#content {
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+div#content > figure > legend {
+  color: #fff;
+  font-family: "Quicksand", sans-serif, monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+div#content > figure > legend::selection {
+  color: var(--primary-color);
+}
+
+/* Poke Logo */
+
+div#content > figure:first-of-type {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Pokemon Search content */
+
+div#poke-search {
+  font-size: 3rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.3s all ease;
+  margin-top: 5rem;
+}
+
+div#poke-search img#img {
+  display: none;
+  height: auto;
+  width: 10rem;
+}
+
+div#poke-search img#img.load {
+  display: block;
+}
+
+div#poke-search > span#text-generated {
+  display: none;
+}
+
+div#poke-search > span#text-generated.show {
+  display: initial;
+  transition: all 0.3s ease;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: #dbdf229d;
+}
+
+
+input#num {
+  margin-top: 1rem;
+  background-color: #59686b;
+  border: 0;
+  border-radius: 0.1875rem;
+  padding: 0.5em;
+  text-align: center;
+  color: #CECECE;
+  font-size: 1.375rem;
+}
+
+/* Button */
+
+div#poke-search button#generator {
+  font-family: var(--all-fonts);
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+div#poke-search button#generator:hover {
+  cursor: pointer;
+  transition: all 0.4s ease;
+  color: #fff;
+  background-color: var(--blue-color);
+  transform: scale(1.05)
+}
+
+/* Stats  */
+
+div#stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0 2rem 0;
+  font-size: 2rem;
+}
+
+div#stats > header#statsheader {
+  margin-bottom: 1rem;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-color: var(--blue-color);
+}
+
+/* Footer */
+
+footer#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.75rem;
+  color: #59686b;
+  background-color: var(--primary-color);
+}
+
+footer#footer.show {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 3.75rem;
+  color: #59686b;
+  background-color: var(--primary-color);
+}
+
+/* Contact */
+
+div#contact-items a:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.1);
+}

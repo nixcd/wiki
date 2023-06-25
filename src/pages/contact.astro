@@ -1,0 +1,44 @@
+---
+import Header from "../layouts/header.astro";
+import Head from "../layouts/head.astro";
+import Card from "../layouts/card.astro";
+---
+<!DOCTYPE html>
+<html lang="es" class="bg-gradient-to-r from-[#FFF601] via-[#FFF601] to-[#FFC837] scroll-smooth">
+
+<Head
+  title="Contact Page"
+  style_type="./public/styles/styles.css"
+  shortcut="./src/media/pokelogo2.png"
+/>
+
+<Header />
+
+<div id="content" class="mb-10">
+  <a href="/" rel="noopener noreferrer"><img src="https://i.imgur.com/BNT7ksu.png" class="block max-w-[75%] m-auto" id="pokelogo" alt="Poke Wiki Logo"></a>
+  <Card/>
+</div>
+
+<script type="module">
+  const wrapper = document.querySelector("#wrapper");
+  const card = document.querySelector("#card");
+
+  const { width, height } = wrapper.getBoundingClientRect();
+  const halfWidth = width / 2;
+  const halfHeight = height / 2;
+
+  wrapper.addEventListener("mousemove", (event) => {
+    card.style.transition = "none";
+    const { offsetX, offsetY } = event;
+    const rotationX = ((offsetX - halfWidth) / halfWidth) * 10;
+    const rotationY = ((offsetY - halfHeight) / halfHeight) * 10;
+
+    card.style.transform = `rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+  });
+
+  wrapper.addEventListener("mouseleave", () => {
+    card.style.transition = "transform .5s ease-in-out";
+    card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+  });
+</script>
+</html>

@@ -1,0 +1,231 @@
+---
+import Header from '../layouts/header.astro';
+import Head from '../layouts/head.astro';
+---
+
+<!DOCTYPE html>
+<html lang="es" class="bg-gradient-to-r from-[#FFF601] via-[#FFF601] to-[#FFC837] scroll-smooth">
+
+<Head
+  title="Poke Wiki created by nixcdev"
+  style_type="./public/styles/styles.css"
+  shortcut="./src/media/pokelogo2.png"
+/>
+
+<body>  
+
+<div id="particles-js"></div>
+<script src="/public/particles.min.js"></script>
+<script type="module">
+  particlesJS (
+  {
+  "particles": {
+    "number": {
+      "value": 25,
+      "density": {
+        "enable": true,
+        "value_area": 1578.2952832645453
+      }
+    },
+    "color": {
+      "value": "#000000"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 0.5,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 3.945738208161363,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 6,
+      "direction": "none",
+      "random": false,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": true,
+        "mode": "repulse"
+      },
+      "onclick": {
+        "enable": true,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 400,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+}
+  )
+</script>
+<Header />
+
+  <div id="content">
+      <a href="/" rel="noopener noreferrer"><img src="https://i.imgur.com/BNT7ksu.png" class="block max-w-[75%] m-auto" id="pokelogo" alt="Poke Wiki Logo"></a>
+    <div id="poke-search">
+      <span id="text-generated">Generate Random Pokemon</span>
+      <img id="img" alt="Photo of the pokemon">
+      <p id="text"></p>
+      <!-- <input min="1" max="807" type="number" id="num" onchange="verPokemon()"> -->
+      <button id="generator" class="shadow-2xl">Generate a new pokemon</button>
+    </div>
+
+    <div id="stats">
+      <header id="statsheader"></header>
+      <p id="hp"></p>
+      <p id="ataque"></p>
+      <p id="defensa"></p>
+      <p id="tipo"></p>
+    </div>
+  </div>
+
+<script type="module">
+
+let img = document.querySelector('#img');
+let txt = document.querySelector('#text');
+let hp = document.querySelector('#hp');
+let header = document.querySelector('#statsheader');
+let attack = document.querySelector('#ataque');
+let defense = document.querySelector('#defensa');
+let type = document.querySelector('#tipo');
+
+// Functions  
+/**
+    The function renderPokemon takes two arguments, imagen and name, and sets the src attribute of the
+    img element to the value of the imagen argument and sets the innerHTML of the txt element to the
+    value of the name argument.
+    @param imagen - the URL of the image
+    @param name - The name of the pokemon
+    @param hp - The hp of the pokemon
+    @param ataque - The attack of the pokemon
+    @param defensa - The defense of the pokemon
+    @param tipo - The type of the pokemon
+ */
+
+function renderPokemon(imagen, name, base_hp, ataque, defensa, tipo) {
+    img.setAttribute('src', imagen);
+    txt.innerHTML = name;
+    header.innerHTML = `Estadísticas de ${name}`;
+    hp.innerHTML = `Vida: <i style="color:red" class="fa-solid fa-heart"></i> ${base_hp} HP`;
+    attack.innerHTML = `Ataque: <i class="fa-solid fa-bolt"></i> ${ataque}`;
+    defense.innerHTML = `Defensa: <i style="color:blue" class="fa-solid fa-shield-halved"></i> ${defensa}`;
+    type.innerHTML = `Tipo: <i class="fa-solid fa-hurricane"></i> ${tipo}`;
+    document.querySelector('#footer').classList.add('show'); // Show footer
+}
+
+/*
+  The function verPokemon() fetches the data from the API and then renders the data to the HTML page.
+*/
+
+// function traduction() {
+//     fetch(`https://pokeapi.co/api/v2/language/7/`)
+//     .then (response => response.json())
+//     .then(spanish => {
+//         let language = spanish.names;
+//         console.log(language)
+//     });
+// }
+
+// traduction();
+
+
+function verPokemon() {
+    let id = Math.floor(Math.random() * (898 - 1) + 1)
+    img.classList.add('load');
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+        .then(response => response.json())
+        .then(pokemon => {
+            let imagen = pokemon.sprites.front_default;
+            let nombre = pokemon.name;
+            let tipo = pokemon.types[0].type.name;
+            let base_hp = pokemon.stats[5].base_stat;
+            let ataque = pokemon.stats[4].base_stat;
+            let defensa = pokemon.stats[3].base_stat;
+            let allpokemons = pokemon.length;
+            renderPokemon(imagen,nombre,base_hp,ataque,defensa,tipo);     
+     });
+}
+
+// Load the pokemon on click
+const button = document.querySelector('#generator');
+const txt_generated = document.querySelector('#text-generated');
+button.addEventListener('click', function(){
+    verPokemon();
+    txt_generated.classList.add('show');
+});
+
+  </script>
+	</body>
+</html>
